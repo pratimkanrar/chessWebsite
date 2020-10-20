@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { gameSubject, initGame, resetGame } from './Game';
+import {Board} from './Board';
 
-function App() {
+export const App = () => {
+
+  const [board, setBoard] = useState([]);
+  const [isGameOver, setIsGameOver] = useState();
+  const [result, setResult] = useState();
+  const [turn, setTurn] = useState();
+
+  useEffect(() => {
+    initGame();
+    const subscribe = gameSubject.subscribe((game) => {
+      setBoard(game.board)
+      setIsGameOver(game.isGameOver)
+      setResult(game.result)
+      setTurn(game.turn)
+    });
+    return () => subscribe.unsubscribe()
+  }, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <div className="newGame"><span className="newGame-text" onClick={resetGame}>NEW GAME</span></div>
+      <div className="container">
+        {isGameOver && (
+          <h2 className="vertical-text">
+            GAME OVER
+            <button onClick={resetGame}>
+              <span className="vertical-text"> NEW GAME</span>
+            </button>
+          </h2>
+        )}
+        <div className="board-container">
+          <Board board={board} turn={turn} />
+        </div>
+        {result && <p className="vertical-text">{result}</p>}
+      </div>
+    </>
+  )
 }
-
-export default App;
