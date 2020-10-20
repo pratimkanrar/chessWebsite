@@ -24,9 +24,7 @@ export const Board = ({ board, turn }) => {
 
   const getPosition = (i) => {
     const { x, y } = getXYPosition(i);
-    const letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][
-      x
-    ];
+    const letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][x];
     return `${letter}${y + 1}`;
   }
   return (
