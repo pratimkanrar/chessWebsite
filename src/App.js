@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { gameSubject, initGame, resetGame } from './Game';
-import {Board} from './Board';
+import { gameSubject, initGame, resetGame } from './components/Game';
+import {Board} from './components/Board';
 
 export const App = () => {
 
@@ -20,7 +20,7 @@ export const App = () => {
     });
     return () => subscribe.unsubscribe()
   }, []);
-  
+
   return (
     <>
       <div className="newGame"><span className="newGame-text" onClick={resetGame}>NEW GAME</span></div>
@@ -28,9 +28,6 @@ export const App = () => {
         {isGameOver && (
           <h2 className="vertical-text">
             GAME OVER
-            <button onClick={resetGame}>
-              <span className="vertical-text"> NEW GAME</span>
-            </button>
           </h2>
         )}
         <div className="board-container">

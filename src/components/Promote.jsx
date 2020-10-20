@@ -16,7 +16,7 @@ export const Promote = ({
               onClick={() => move(from, to, p)}
             >
               <img
-                src={require(`./assets/${p}_${color}.png`)}
+                src={require(`../assets/${p}_${color}.png`)}
                 alt=""
                 className="piece cursor-pointer"
               />

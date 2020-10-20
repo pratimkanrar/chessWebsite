@@ -14,7 +14,7 @@ export const Piece = ({
       return { isDragging: !!monitor.isDragging() }
     },
   })
-  const pieceImg = require(`./assets/${type}_${color}.png`)
+  const pieceImg = require(`../assets/${type}_${color}.png`)
   return (
     <>
       <DragPreviewImage connect={preview} src={pieceImg} />
