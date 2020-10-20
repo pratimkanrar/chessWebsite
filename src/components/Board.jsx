@@ -8,29 +8,26 @@ export const Board = ({ board, turn }) => {
   useEffect(() => {
     setCurrBoard(
       turn === 'w' ? board.flat() : board.flat().reverse()
-    )
+    );
   }, [board, turn])
 
-  function getXYPosition(i) {
-    const x = turn === 'w' ? i % 8 : Math.abs((i % 8) - 7)
-    const y =
-      turn === 'w'
-        ? Math.abs(Math.floor(i / 8) - 7)
-        : Math.floor(i / 8)
-    return { x, y }
+  const getXYPosition = (i) => {
+    const x = turn === 'w' ? i % 8 : Math.abs((i % 8) - 7);
+    const y = turn === 'w' ?  Math.abs(Math.floor(i / 8) - 7) : Math.floor(i / 8);
+    return { x, y };
   }
 
-  function isBlack(i) {
-    const { x, y } = getXYPosition(i)
-    return (x + y) % 2 !== 1
+  const isBlack = (i) => {
+    const { x, y } = getXYPosition(i);
+    return (x + y) % 2 !== 1;
   }
 
-  function getPosition(i) {
-    const { x, y } = getXYPosition(i)
+  const getPosition = (i) => {
+    const { x, y } = getXYPosition(i);
     const letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][
       x
-    ]
-    return `${letter}${y + 1}`
+    ];
+    return `${letter}${y + 1}`;
   }
   return (
     <div className="board">

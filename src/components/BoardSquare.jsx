@@ -10,20 +10,18 @@ export const BoardSquare = ({
   black,
   position,
 }) => {
-  const [promotion, setPromotion] = useState(null)
+  const [promotion, setPromotion] = useState(null);
   const [, drop] = useDrop({
     accept: 'piece',
     drop: (item) => {
-      const [fromPosition] = item.id.split('_')
-      handleMove(fromPosition, position)
+      const [fromPosition] = item.id.split('_');
+      handleMove(fromPosition, position);
     },
   })
   useEffect(() => {
     const subscribe = gameSubject.subscribe(
       ({ pendingPromotion }) =>
-        pendingPromotion && pendingPromotion.to === position
-          ? setPromotion(pendingPromotion)
-          : setPromotion(null)
+        pendingPromotion && pendingPromotion.to === position ? setPromotion(pendingPromotion) : setPromotion(null)
     )
     return () => subscribe.unsubscribe()
   }, [position])
