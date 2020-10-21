@@ -11,7 +11,7 @@ export const Piece = ({
       id: `${position}_${type}_${color}`,
     },
     collect: (monitor) => {
-      return { isDragging: !!monitor.isDragging() }
+      return { isDragging: monitor.isDragging() }
     },
   })
   const pieceImg = require(`../assets/${type}_${color}.png`);
