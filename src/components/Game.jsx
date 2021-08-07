@@ -1,15 +1,13 @@
 import * as Chess from 'chess.js';
 import { BehaviorSubject } from 'rxjs';
 
-
-
 const chess = new Chess();
 
 export const gameSubject = new BehaviorSubject();
 
 export const initGame = () => {
     const savedGame = localStorage.getItem('savedGame');
-    if (savedGame) {
+    if(savedGame) {
         chess.load(savedGame);
     }
     updateGame();
@@ -29,7 +27,7 @@ export const handleMove = (from, to) => {
     }
     const { pendingPromotion } = gameSubject.getValue();
 
-    if (!pendingPromotion) {
+    if(!pendingPromotion) {
         move(from, to);
     }
 }
@@ -63,10 +61,11 @@ const updateGame = (pendingPromotion) => {
     gameSubject.next(newGame);
 }
 const getGameResult = () => {
-    if (chess.in_checkmate()) {
+    if(chess.in_checkmate()) {
         const winner = chess.turn() === "w" ? 'BLACK' : 'WHITE';
         return `CHECKMATE - WINNER - ${winner}`;
-    } else if (chess.in_draw()) {
+    }
+    else if(chess.in_draw()) {
         let reason = '50 - MOVES - RULE';
         if (chess.in_stalemate()) {
             reason = 'STALEMATE';
@@ -76,7 +75,8 @@ const getGameResult = () => {
             reason = "INSUFFICIENT MATERIAL";
         }
         return `DRAW - ${reason}`;
-    } else {
+    }
+    else {
         return 'UNKNOWN REASON';
     }
 }
